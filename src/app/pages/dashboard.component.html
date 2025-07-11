@@ -1,0 +1,49 @@
+<div class="container-fluid" style="padding:50px;">
+  <h1 style="margin-top: 0px;">Bryllup 2026 - Gjesteliste</h1>
+
+  <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div style="display: flex; flex-direction: row; align-items: center; font-size: 1.2rem; gap: 20px;">
+      <div style="display: flex; flex-direction: row; align-items: center; gap: 20px;">
+        <div><i style="margin-right: 6px;" class="fa-solid fa-user-group"></i>Total antall gjester: {{ allGuests.length }}</div>
+        <div *ngFor="let filter of filterCounts">
+          <div><i style="margin-right: 6px;" class="fa-solid fa-user-group"></i><span>{{ filter.label }}: {{ filter.value }}</span></div>
+        </div>
+      </div>
+      <div>
+        <i style="margin-right: 6px;" class="fa-solid fa-magnifying-glass"></i> <span>Søketreff: {{ guests.length }}</span>
+      </div>
+    </div>
+    <button mat-raised-button (click)="openDialog()">Legg til gjest</button>
+  </div>
+
+  <div style="width: 100%;">
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Søk</mat-label>
+      <input matInput placeholder="Søk etter navn eller kategori" #searchInput (input)="search(searchInput.value)">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Kategori</th>
+          <th>Lagt til</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let guest of guests">
+          <td>{{ guest.name }}</td>
+          <td>{{ guest.category }}</td>
+          <td>{{ guest.created_at | datepipe }}</td>
+          <td>
+            <button mat-icon-button><i class="fa-solid fa-pen-to-square"></i></button>
+            <button mat-icon-button (click)="deleteGuest(guest.id)"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
