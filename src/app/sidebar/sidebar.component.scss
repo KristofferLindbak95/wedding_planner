@@ -1,0 +1,17 @@
+#sidebar-container {
+    height: 100vh; 
+    padding: 20px; 
+    background-color: lightgrey;
+}
+
+#navbar-link {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+} 
+
+#sidebar-container a {
+    font-size: 18px;
+    color: #000;
+    text-decoration: none;
+}

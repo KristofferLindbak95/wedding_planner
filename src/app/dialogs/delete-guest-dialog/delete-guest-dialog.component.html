@@ -1,0 +1,10 @@
+<div style="padding: 50px;">
+    <div class="dialog-header">
+      <h2 style="margin-top: 0px;">Slett gjest</h2>
+      <p>Er du sikker på at du ønsker å slette <strong>{{ name }}</strong> fra gjestelisten?</p>
+    </div>
+    <div style="display: flex; flex-direction: row; gap: 1rem;">
+      <button type="button" mat-raised-button (click)="closeDialog(false)">Avbryt</button>
+      <button type="button" mat-raised-button (click)="deleteGuest()">Bekreft</button>
+    </div>
+</div>
