@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from 'src/environments/environment';
-import { AddGuestDialogComponent } from '../dialogs/add-guest-dialog/add-guest-dialog.component';
+import { AddGuestDialogComponent } from '../../dialogs/add-guest-dialog/add-guest-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteGuestDialogComponent } from '../dialogs/delete-guest-dialog/delete-guest-dialog.component';
-import { EditGuestDialogComponent } from '../dialogs/edit-guest-dialog/edit-guest-dialog.component';
+import { DeleteGuestDialogComponent } from '../../dialogs/delete-guest-dialog/delete-guest-dialog.component';
+import { EditGuestDialogComponent } from '../../dialogs/edit-guest-dialog/edit-guest-dialog.component';
 
 
 @Component({

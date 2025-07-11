@@ -5,7 +5,7 @@ import { AuthComponent } from './auth/auth.component'
 import { AccountComponent } from './account/account.component'
 import { ReactiveFormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module'
-import DashboardComponent from './pages/dashboard.component'
+import DashboardComponent from './pages/guestlist/dashboard.component'
 import { Datepipe } from './pipes/datepipe'
 import { DatePipe } from '@angular/common'
 import { AddGuestDialogComponent } from './dialogs/add-guest-dialog/add-guest-dialog.component'
@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DeleteGuestDialogComponent } from './dialogs/delete-guest-dialog/delete-guest-dialog.component'
 import { EditGuestDialogComponent } from './dialogs/edit-guest-dialog/edit-guest-dialog.component'
 import { SidebarComponent } from './sidebar/sidebar.component'
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { SidebarComponent } from './sidebar/sidebar.component'
     MatButtonToggleModule,
     MatCheckboxModule,
     MatTooltipModule,
+    DragDropModule,
     BrowserAnimationsModule
   ],
   providers: [

@@ -8,4 +8,11 @@
   </ng-template>
 </div> -->
 
-<router-outlet></router-outlet>
+<div style="display: flex; flex-direction: row; height: 100vh; width: 100vw; overflow: hidden;">
+  <app-sidebar></app-sidebar>
+
+  <!-- wrapper around router-outlet -->
+  <div style="flex: 1; overflow: auto;">
+    <router-outlet></router-outlet>
+  </div>
+</div>
