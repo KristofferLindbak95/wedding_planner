@@ -7,5 +7,9 @@
     <app-auth></app-auth>
   </ng-template>
 </div> -->
-
-<router-outlet></router-outlet>
+<div style="display: flex; flex-direction: row">
+  <app-sidebar></app-sidebar>
+  <div style="flex: 1; overflow: auto;">
+    <router-outlet></router-outlet>
+  </div>
+</div>

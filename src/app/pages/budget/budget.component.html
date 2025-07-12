@@ -2,35 +2,50 @@
     <h1 style="margin-top: 0px;">Budsjett</h1>
 
     <div class="example-container">
-        <h2>To do</h2>
-      
+        <h2>Utestående - {{ totalUnpaid | number }}</h2>
+
         <div
           cdkDropList
           #todoList="cdkDropList"
-          [cdkDropListData]="todo"
+          [cdkDropListData]="hasNotBeenPaid"
           [cdkDropListConnectedTo]="[doneList]"
           class="example-list"
           (cdkDropListDropped)="drop($event)">
-          <!-- @for (item of todo; track item) {
-            <div class="example-box" cdkDrag>{{item}}</div>
-          } -->
+          <div *ngFor="let item of hasNotBeenPaid" class="example-box" cdkDrag style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; font-size: 18px;">
+              <p>{{ item.description }}</p>
+              <p>{{ item.price | number }}</p>
+            </div>
+            <div style="display: flex; flex-direction: row; justify-content: flex-end; width: 100%; font-size: 14px; color: red;">
+              <p>Frist: {{ item.due_date | datepipe }}</p>
+            </div>
+          </div>
         </div>
       </div>
-      
+
+      <!-- Kan man legge til et tredje alternativ her som heter delvis betalt. F.eks fotograf der vi har betalt halvparten -->
+
       <div class="example-container">
-        <h2>Done</h2>
-      
+        <h2>Betalt - {{ totalPaid | number }}</h2>
+
         <div
           cdkDropList
           #doneList="cdkDropList"
-          [cdkDropListData]="done"
+          [cdkDropListData]="hasBeenPaid"
           [cdkDropListConnectedTo]="[todoList]"
           class="example-list"
           (cdkDropListDropped)="drop($event)">
-          <!-- @for (item of done; track item) {
-            <div class="example-box" cdkDrag>{{item}}</div>
-          } -->
+          <div *ngFor="let item of hasBeenPaid" class="example-box" cdkDrag style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; font-size: 18px;">
+              <p>{{ item.description }}</p>
+              <p>{{ item.price | number }}</p>
+            </div>
+            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; font-size: 14px;">
+              <p style="color: green;">Betalt: {{ item.payment_date | datepipe }}</p>
+              <p style="color: red;">Frist: {{ item.due_date | datepipe }}</p>
+            </div>
+          </div>
         </div>
-      </div>      
+      </div>
 
 </div>
