@@ -23,6 +23,7 @@ import { DeleteGuestDialogComponent } from './dialogs/delete-guest-dialog/delete
 import { EditGuestDialogComponent } from './dialogs/edit-guest-dialog/edit-guest-dialog.component'
 import { SidebarComponent } from './sidebar/sidebar.component'
 import { BudgetComponent } from './pages/budget/budget.component'
+import { AddCostDialogComponent } from './dialogs/add-cost-dialog/add-cost-dialog.component'
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { BudgetComponent } from './pages/budget/budget.component'
     SidebarComponent,
     BudgetComponent,
     AddGuestDialogComponent,
+    AddCostDialogComponent,
     DeleteGuestDialogComponent,
     EditGuestDialogComponent,
     Datepipe

@@ -1,7 +1,7 @@
 <div style="padding: 50px;">
   <div class="dialog-header">
     <h2 style="margin-top: 0px;">Legg til gjest</h2>
-    <p>Fyll ut navn og kategori for gjesten som legges til.</p>
+    <p>Fyll ut informasjon for gjesten som legges til.</p>
   </div>
   <form [formGroup]="addGuestForm" (ngSubmit)="addGuest()">
     <mat-form-field appearance="outline" style="width: 100%;">
@@ -17,6 +17,13 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Allergier</mat-label>
+      <input matInput placeholder="Allergier.." formControlName="allergies">
+    </mat-form-field>
+    <div style="margin-bottom: 22px;">
+      <mat-checkbox formControlName="best_man">Forlover</mat-checkbox>
+    </div>
     <div style="display: flex; flex-direction: row; gap: 1rem;">
       <button type="button" mat-raised-button (click)="closeDialog(false)">Avbryt</button>
       <button type="submit" mat-raised-button>Legg til</button>

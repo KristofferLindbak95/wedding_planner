@@ -30,7 +30,7 @@ export default class DashboardComponent implements OnInit {
 
   public search(searchInput: string) {
     setTimeout(() => {
-        this.filterGuests = this.allGuests.filter((x: any) => x.name.toLowerCase().includes(searchInput.toLowerCase()) || x.category.toLowerCase().includes(searchInput.toLowerCase()));
+        this.filterGuests = this.allGuests.filter((x: any) => x.name.toLowerCase().includes(searchInput.toLowerCase()) || x.category.toLowerCase().includes(searchInput.toLowerCase()) || x.allergies?.toLowerCase().includes(searchInput.toLowerCase()) || ('allergier'.includes(searchInput.toLowerCase()) && x.allergies) || ('forlovere'.includes(searchInput.toLowerCase()) && x.best_man) );
         this.guests = this.filterGuests;
         if (!searchInput && this.filterGuests.length === 0) {
           this.guests = this.allGuests;
@@ -54,13 +54,14 @@ export default class DashboardComponent implements OnInit {
   }
 
   public async editGuest(guest: any) {
-    console.log('guest: ', guest);
     const dialogRef = this._dialog.open(EditGuestDialogComponent, {
       data: {
         id: guest.id,
         name: guest.name,
         category: this.categories.find((x: any) => x.description.toLowerCase() === guest.category.toLowerCase())?.id,
-        categories: this.categories
+        categories: this.categories,
+        allergies: guest.allergies,
+        best_man: guest.best_man
       },
       autoFocus: false
     });

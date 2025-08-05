@@ -27,13 +27,15 @@ export class AddGuestDialogComponent {
   private createFormGroup() {
     this.addGuestForm = this._formBuilder.group({
       name: [''],
-      category: ['']
+      category: [''],
+      allergies: [''],
+      best_man: ['']
     });
   }
 
   public async addGuest() {
     const formData = this.addGuestForm.value;
-    await this.supabase.from('guests').insert({ name: formData.name, category: formData.category });
+    await this.supabase.from('guests').insert({ name: formData.name, category: formData.category, allergies: formData.allergies, best_man: formData.best_man });
 
     this.closeDialog(true);
   }

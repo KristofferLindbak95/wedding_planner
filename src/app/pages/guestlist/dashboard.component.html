@@ -29,14 +29,21 @@
         <tr>
           <th>Navn</th>
           <th>Kategori</th>
+          <th>Allergier</th>
           <th>Lagt til</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let guest of guests">
-          <td>{{ guest.name }}</td>
+          <td>
+            <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+              <span>{{ guest.name }}</span>
+              <i *ngIf="guest.best_man" matTooltip="Forlover" class="fa-solid fa-star" style="color: orange;"></i>
+            </div>
+          </td>
           <td>{{ guest.category }}</td>
+          <td>{{ guest.allergies }}</td>
           <td>{{ guest.created_at | datepipe }}</td>
           <td style="width: 6rem !important;">
             <button mat-icon-button (click)="editGuest(guest)" matTooltip="Rediger"><i class="fa-solid fa-pen-to-square"></i></button>

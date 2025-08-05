@@ -1,51 +1,35 @@
 <div class="container-fluid" style="padding:50px;">
-    <h1 style="margin-top: 0px;">Budsjett</h1>
-
-    <div class="example-container">
-        <h2>Utestående - {{ totalUnpaid | number }}</h2>
-
-        <div
-          cdkDropList
-          #todoList="cdkDropList"
-          [cdkDropListData]="hasNotBeenPaid"
-          [cdkDropListConnectedTo]="[doneList]"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div *ngFor="let item of hasNotBeenPaid" class="example-box" cdkDrag style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; font-size: 18px;">
-              <p>{{ item.description }}</p>
-              <p>{{ item.price | number }}</p>
-            </div>
-            <div style="display: flex; flex-direction: row; justify-content: flex-end; width: 100%; font-size: 14px; color: red;">
-              <p>Frist: {{ item.due_date | datepipe }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Kan man legge til et tredje alternativ her som heter delvis betalt. F.eks fotograf der vi har betalt halvparten -->
-
-      <div class="example-container">
-        <h2>Betalt - {{ totalPaid | number }}</h2>
-
-        <div
-          cdkDropList
-          #doneList="cdkDropList"
-          [cdkDropListData]="hasBeenPaid"
-          [cdkDropListConnectedTo]="[todoList]"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div *ngFor="let item of hasBeenPaid" class="example-box" cdkDrag style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; font-size: 18px;">
-              <p>{{ item.description }}</p>
-              <p>{{ item.price | number }}</p>
-            </div>
-            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; font-size: 14px;">
-              <p style="color: green;">Betalt: {{ item.payment_date | datepipe }}</p>
-              <p style="color: red;">Frist: {{ item.due_date | datepipe }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
+  <h1 style="margin-top: 0px;">Utgifter</h1>
+  <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div style="display: flex; flex-direction: row; align-items: center; font-size: 1.2rem; gap: 20px;">
+      <div><i style="margin-right: 6px;" class="fa-solid fa-piggy-bank"></i><span>Budsjett: 220,000</span></div>
+    </div>
+    <button mat-raised-button (click)="openDialog()" matTooltip="Legg til">Legg til utgift</button>
+  </div>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Beskrivelse</th>
+          <th>Estimert</th>
+          <th>Faktisk</th>
+          <th>Betalt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of budget">
+          <td>{{ item.description }}</td>
+          <td style="text-align: right;">{{ item.estimated_cost | number }}</td>
+          <td style="text-align: right;">{{ item.actual_cost | number }}</td>
+          <td style="text-align: right;">{{ item.has_been_paid | number }}</td>
+        </tr>
+        <tr>
+          <td><strong>Sum</strong></td>
+          <td style="text-align: right;"><strong>{{ estimatedCost | number }}</strong></td>
+          <td style="text-align: right;"><strong>{{ actualCost | number }}</strong></td>
+          <td style="text-align: right;"><strong>{{ totalHasBeenPaid | number }}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

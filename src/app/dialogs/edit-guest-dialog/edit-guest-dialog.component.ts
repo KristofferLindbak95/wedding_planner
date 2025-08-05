@@ -12,6 +12,8 @@ export class EditGuestDialogComponent {
     public id: number;
     public name: string;
     public category: number;
+    public allergies: string;
+    public best_man: boolean;
     public editGuestForm: any;
     public categories: any = [];
     private supabase: SupabaseClient;
@@ -21,13 +23,15 @@ export class EditGuestDialogComponent {
         this.name = this.data.name;
         this.category = this.data.category;
         this.categories = this.data.categories || [];
+        this.allergies = this.data.allergies;
+        this.best_man = this.data.best_man;
         this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
         this.createFormGroup();
     }
 
     public async editGuest() {
         const formData = this.editGuestForm.value;
-        await this.supabase.from('guests').update({ 'name': formData.name, 'category': formData.category }).eq('id', this.id);
+        await this.supabase.from('guests').update({ 'name': formData.name, 'category': formData.category, 'allergies': formData.allergies, 'best_man': formData.best_man }).eq('id', this.id);
     
         this.closeDialog(true);
     }
@@ -39,7 +43,9 @@ export class EditGuestDialogComponent {
     private createFormGroup() {
         this.editGuestForm = this._formBuilder.group({
           name: [''],
-          category: ['']
+          category: [''],
+          allergies: [''],
+          best_man: ['']
         });
         this.mapModelToForm();
     }
@@ -47,5 +53,7 @@ export class EditGuestDialogComponent {
     private mapModelToForm(){
         this.editGuestForm.patchValue({ 'name': this.name });
         this.editGuestForm.patchValue({ 'category': this.category });
+        this.editGuestForm.patchValue({ 'allergies': this.allergies });
+        this.editGuestForm.patchValue({ 'best_man': this.best_man });
     }
 }

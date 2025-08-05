@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { MatDialog } from "@angular/material/dialog";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import { AddCostDialogComponent } from "src/app/dialogs/add-cost-dialog/add-cost-dialog.component";
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -10,13 +11,12 @@ import { environment } from "src/environments/environment";
 })
 export class BudgetComponent implements OnInit {
   public budget: any = [];
-  public hasNotBeenPaid: any = [];
-  public hasBeenPaid: any = [];
-  public totalUnpaid: number = 0;
-  public totalPaid: number = 0;
+  public totalHasBeenPaid: number = 0;
+  public estimatedCost: number = 0;
+  public actualCost: number = 0;
   private supabase: SupabaseClient;
 
-  constructor () {
+  constructor (private _dialog: MatDialog) {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
   }
 
@@ -24,33 +24,24 @@ export class BudgetComponent implements OnInit {
     await this.getData();
   }
 
-  protected async getData() {
-    this.budget = await this.getTableData('budget');
-    this.hasNotBeenPaid = this.budget.filter((x: any) => !x.has_been_paid);
-    this.hasBeenPaid = this.budget.filter((x: any) => x.has_been_paid);
+  protected openDialog() {
+    const dialogRef = this._dialog.open(AddCostDialogComponent, {
+      autoFocus: false
+    });
 
-    this.totalUnpaid = this.hasNotBeenPaid.reduce((sum: any, product: any) => sum + product.price, 0);
-    this.totalPaid = this.hasBeenPaid.reduce((sum: any, product: any) => sum + product.price, 0);
-    console.log(this.totalUnpaid);
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.getData();
+      }
+    });
   }
 
-  async drop(event: CdkDragDrop<string[] | any>) {
-    // await this.supabase.from('guests').update({ 'name': formData.name, 'category': formData.category }).eq('id', this.id);
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-
-      const itemToUpdate = event.container.data[event.currentIndex];
-      await this.supabase.from('budget').update({ 'payment_date': new Date().toISOString(), 'has_been_paid': !itemToUpdate.has_been_paid }).eq('id', itemToUpdate.id);
-    }
-
-
+  protected async getData() {
+    this.budget = await this.getTableData('budget');
+    this.budget.sort((a: any, b: any) => a.description.localeCompare(b.description));
+    this.totalHasBeenPaid = this.budget.filter((x: any) => x.has_been_paid).reduce((sum: number, x: any) => sum + x.has_been_paid, 0);
+    this.estimatedCost = this.budget.filter((x: any) => x.estimated_cost).reduce((sum: number, x: any) => sum + x.estimated_cost, 0);
+    this.actualCost = this.budget.filter((x: any) => x.actual_cost).reduce((sum: number, x: any) => sum + x.actual_cost, 0);
   }
 
   protected async getTableData(tableName: string) {
