@@ -3,4 +3,26 @@
       <h2 style="margin-top: 0px;">Legg til utgift</h2>
       <p>Fyll ut navn og kategori for gjesten som legges til.</p>
     </div>
+    <form [formGroup]="addCostForm" (ngSubmit)="addCost()">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Beskrivelse</mat-label>
+        <input matInput placeholder="Beskrivelse.." formControlName="description">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Estimert</mat-label>
+        <input matInput placeholder="Estimert.." formControlName="estimated_cost">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Faktisk</mat-label>
+        <input matInput placeholder="Faktisk.." formControlName="actual_cost">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Betalt</mat-label>
+        <input matInput placeholder="Betalt.." formControlName="has_been_paid">
+      </mat-form-field>
+      <div style="display: flex; flex-direction: row; gap: 1rem;">
+        <button type="button" mat-raised-button (click)="closeDialog(false)">Avbryt</button>
+        <button type="submit" mat-raised-button>Legg til</button>
+      </div>
+    </form>
 </div>

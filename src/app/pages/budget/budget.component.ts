@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import { AddCostDialogComponent } from "src/app/dialogs/add-cost-dialog/add-cost-dialog.component";
+import { DeleteCostDialogComponent } from "src/app/dialogs/delete-cost-dialog/delete-cost-dialog.component";
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -24,7 +25,7 @@ export class BudgetComponent implements OnInit {
     await this.getData();
   }
 
-  protected openDialog() {
+  public openDialog() {
     const dialogRef = this._dialog.open(AddCostDialogComponent, {
       autoFocus: false
     });
@@ -50,5 +51,25 @@ export class BudgetComponent implements OnInit {
       throw error;
     }
     return data;
+  }
+
+  public async editCost(item: any) {
+
+  }
+
+  public async deleteCost(item: any) {
+    const dialogRef = this._dialog.open(DeleteCostDialogComponent, {
+      data: {
+        id: item.id,
+        description: item.description
+      }, 
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.getData();
+      }
+    });
   }
 }

@@ -14,6 +14,7 @@
           <th>Estimert</th>
           <th>Faktisk</th>
           <th>Betalt</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -22,12 +23,17 @@
           <td style="text-align: right;">{{ item.estimated_cost | number }}</td>
           <td style="text-align: right;">{{ item.actual_cost | number }}</td>
           <td style="text-align: right;">{{ item.has_been_paid | number }}</td>
+          <td style="width: 6rem !important;">
+            <button mat-icon-button (click)="editCost(item)" matTooltip="Rediger"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button mat-icon-button (click)="deleteCost(item)" matTooltip="Slett"><i class="fa-solid fa-trash"></i></button>
+          </td>
         </tr>
         <tr>
           <td><strong>Sum</strong></td>
           <td style="text-align: right;"><strong>{{ estimatedCost | number }}</strong></td>
           <td style="text-align: right;"><strong>{{ actualCost | number }}</strong></td>
           <td style="text-align: right;"><strong>{{ totalHasBeenPaid | number }}</strong></td>
+          <td></td>
         </tr>
       </tbody>
     </table>

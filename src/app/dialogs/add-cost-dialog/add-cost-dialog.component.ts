@@ -17,16 +17,26 @@ export class AddCostDialogComponent {
         @Inject(MAT_DIALOG_DATA) public data: any,
         private _formBuilder: FormBuilder) {
         this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+        this.createFormGroup();
     }
 
-    public async addGuest() {
+    public async addCost() {
         const formData = this.addCostForm.value;
-        await this.supabase.from('guests').insert({ name: formData.name, category: formData.category });
+        await this.supabase.from('budget').insert({ description: formData.description, estimated_cost: formData.estimated_cost, actual_cost: formData.actual_cost, has_been_paid: formData.has_been_paid });
 
         this.closeDialog(true);
     }
 
     public closeDialog(result: boolean) {
         this.dialogRef.close(result);
+    }
+
+    private createFormGroup() {
+        this.addCostForm = this._formBuilder.group({
+            description: [''],
+            estimated_cost: [null],
+            actual_cost: [null],
+            has_been_paid: [null]
+          });
     }
 }
