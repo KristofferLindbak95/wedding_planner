@@ -1,0 +1,20 @@
+<div style="padding: 50px;">
+  <div class="dialog-header">
+    <h2 style="margin-top: 0px;">Legg til bord</h2>
+    <p>Legg til et nytt bord og fyll ut informasjon om bordet.</p>
+  </div>
+  <form [formGroup]="addTableForm" (ngSubmit)="addTable()">
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Bord nummer</mat-label>
+      <input type="number" matInput placeholder="Bord nummer.." formControlName="table_number">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Antall personer</mat-label>
+      <input type="number" matInput placeholder="Antall personer.." formControlName="number_of_people">
+    </mat-form-field>
+    <div style="display: flex; flex-direction: row; gap: 1rem;">
+      <button type="button" mat-raised-button (click)="closeDialog(false)">Avbryt</button>
+      <button type="submit" mat-raised-button>Legg til</button>
+    </div>
+  </form>
+</div>

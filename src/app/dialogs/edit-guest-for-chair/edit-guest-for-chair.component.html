@@ -1,0 +1,21 @@
+<div style="padding: 50px;">
+  <div class="dialog-header">
+      <h2 style="margin-top: 0px;">Endre bordplassering</h2>
+      <p>Endre gjesten som sitter på stol {{ index + 1 }} ved bord {{ table.table_number }}.</p>
+    </div>
+    <form [formGroup]="editGuestForChairForm" (ngSubmit)="editGuestForChair()">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Gjest</mat-label>
+        <mat-select formControlName="guest_id" placeholder="Gjest..">
+          <mat-option value="0">Ingen gjest</mat-option>
+          <mat-option *ngFor="let guest of guests" [value]="guest.id">
+            {{ guest.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div style="display: flex; flex-direction: row; gap: 1rem;">
+        <button type="button" mat-raised-button (click)="closeDialog(false)">Avbryt</button>
+        <button type="submit" mat-raised-button>Lagre</button>
+      </div>
+  </form>
+</div>

@@ -5,7 +5,6 @@ import { AuthComponent } from './auth/auth.component'
 import { AccountComponent } from './account/account.component'
 import { ReactiveFormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module'
-import DashboardComponent from './pages/guestlist/dashboard.component'
 import { Datepipe } from './pipes/datepipe'
 import { DatePipe } from '@angular/common'
 import { AddGuestDialogComponent } from './dialogs/add-guest-dialog/add-guest-dialog.component'
@@ -25,20 +24,31 @@ import { SidebarComponent } from './sidebar/sidebar.component'
 import { BudgetComponent } from './pages/budget/budget.component'
 import { AddCostDialogComponent } from './dialogs/add-cost-dialog/add-cost-dialog.component'
 import { DeleteCostDialogComponent } from './dialogs/delete-cost-dialog/delete-cost-dialog.component'
+import { EditCostDialogComponent } from './dialogs/edit-cost-dialog/edit-cost-dialog.component'
+import { TablesComponent } from './pages/tables/tables.component'
+import { AddTableDialogComponent } from './dialogs/add-table-dialog/add-table-dialog.component'
+import { GuestListComponent } from './pages/guest-list/guest-list.component'
+import { EditGuestForChairComponent } from './dialogs/edit-guest-for-chair/edit-guest-for-chair.component'
+import { DeleteTableDialogComponent } from './dialogs/delete-table-dialog/delete-table-dialog.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     AccountComponent,
-    DashboardComponent,
+    GuestListComponent,
     SidebarComponent,
     BudgetComponent,
+    TablesComponent,
     AddGuestDialogComponent,
     AddCostDialogComponent,
+    AddTableDialogComponent,
     DeleteGuestDialogComponent,
     DeleteCostDialogComponent,
+    DeleteTableDialogComponent,
     EditGuestDialogComponent,
+    EditCostDialogComponent,
+    EditGuestForChairComponent,
     Datepipe
   ],
   imports: [

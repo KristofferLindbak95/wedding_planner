@@ -1,0 +1,54 @@
+.table-container {
+  position: relative;
+  padding: 20px 0px;
+  & .delete-table-button {
+    position: absolute;
+    top: 20px;
+    right: 0px;
+    z-index: 1;
+  }
+}
+
+.table-wrapper {
+  width: 100%;
+  height: 70vh;
+  position: relative; /* THIS IS CRUCIAL */
+  border: 1px dashed #ccc; /* Optional: visual aid */
+}
+
+.table-circle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 50%;
+  aspect-ratio: 1; /* This ensures width equals height for perfect circle */
+  border-radius: 50%;
+  border: 2px dashed #ccc;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  font-size: 1.5rem;
+}
+
+.chair {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px dashed orange;
+  padding: 10px;
+  position: absolute; /* needed for positioning using [ngStyle] */
+  cursor: pointer;
+  font-size: 1rem;
+  font-style: italic;
+  &.empty-chair {
+    border: 2px dashed green;
+  }
+}

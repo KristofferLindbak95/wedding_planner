@@ -1,0 +1,28 @@
+<div class="container-fluid" style="padding:50px;">
+  <h1 style="margin-top: 0px;">Bordplassering</h1>
+  <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div style="display: flex; flex-direction: row; align-items: center; font-size: 1.2rem; gap: 20px;">
+      <div><i style="margin-right: 6px;" class="fa-solid fa-table"></i><span>Antall bord: {{ tables.length}}</span></div>
+    </div>
+    <button mat-raised-button (click)="openDialog()" matTooltip="Legg til">Legg til bord</button>
+  </div>
+
+  <div *ngFor="let table of tables" class="table-container col-md-6">
+    <span class="delete-table-button">
+      <button mat-icon-button (click)="deleteTable(table)" matTooltip="Slett bord"><i class="fa-solid fa-trash"></i></button>
+    </span>
+    <div class="table-wrapper">
+      <div class="table-circle"><strong>Bord: {{ table.table_number }}</strong></div>
+      <div class="chair" [ngClass]="{'empty-chair': !getPersonForChair(table, i)}" *ngFor="let chair of getChairs(table.number_of_people); let i = index" (click)="changeGuestForChair(table, i)" [ngStyle]="getChairStyle(i, table.number_of_people)">
+        <span style="position: absolute; top: 0; left: 0; border-bottom: 1px solid #000; font-style:normal;">{{ i + 1}}</span>
+        <ng-container *ngIf="getPersonForChair(table, i); else addIcon">
+          {{ getPersonForChair(table, i).name }}
+        </ng-container>
+        <ng-template #addIcon>
+          <i class="fa-solid fa-plus" style="font-size: 1.2rem"></i>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+</div>

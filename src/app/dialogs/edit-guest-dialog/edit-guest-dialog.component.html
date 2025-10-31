@@ -1,32 +1,32 @@
 <div style="padding: 50px;">
-    <div class="dialog-header">
-        <h2 style="margin-top: 0px;">Rediger gjest</h2>
-        <p>Endre gjeste informasjonen for <strong>{{ name }}</strong>.</p>
+  <div class="dialog-header">
+      <h2 style="margin-top: 0px;">Rediger gjest</h2>
+      <p>Endre gjeste informasjonen for <strong>{{ name }}</strong>.</p>
+    </div>
+    <form [formGroup]="editGuestForm" (ngSubmit)="editGuest()">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Navn</mat-label>
+        <input matInput placeholder="Navn.." formControlName="name">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Kategori</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="0">Ingen kategori</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{ category.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Allergier</mat-label>
+        <input matInput placeholder="Allergier.." formControlName="allergies">
+      </mat-form-field>
+      <div style="margin-bottom: 22px;">
+        <mat-checkbox formControlName="best_man">Forlover</mat-checkbox>
       </div>
-      <form [formGroup]="editGuestForm" (ngSubmit)="editGuest()">
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label>Navn</mat-label>
-          <input matInput placeholder="Navn.." formControlName="name">
-        </mat-form-field>
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label>Kategori</mat-label>
-          <mat-select formControlName="category">
-            <mat-option value="0">Ingen kategori</mat-option>
-            <mat-option *ngFor="let category of categories" [value]="category.id">
-              {{ category.description }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label>Allergier</mat-label>
-          <input matInput placeholder="Allergier.." formControlName="allergies">
-        </mat-form-field>
-        <div style="margin-bottom: 22px;">
-          <mat-checkbox formControlName="best_man">Forlover</mat-checkbox>
-        </div>
-        <div style="display: flex; flex-direction: row; gap: 1rem;">
-          <button type="button" mat-raised-button (click)="closeDialog(false)">Avbryt</button>
-          <button type="submit" mat-raised-button>Lagre</button>
-        </div>
-    </form>
+      <div style="display: flex; flex-direction: row; gap: 1rem;">
+        <button type="button" mat-raised-button (click)="closeDialog(false)">Avbryt</button>
+        <button type="submit" mat-raised-button>Lagre</button>
+      </div>
+  </form>
 </div>

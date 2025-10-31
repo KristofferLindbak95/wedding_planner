@@ -12,14 +12,14 @@ import { environment } from "src/environments/environment";
 export class AddGuestDialogComponent {
   public addGuestForm: any;
   public categories: any = [];
-  private supabase: SupabaseClient;
+  private _supabase: SupabaseClient;
 
   constructor(
     public dialogRef: MatDialogRef<AddGuestDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _formBuilder: FormBuilder
   ) {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    this._supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
     this.categories = this.data.categories || [];
     this.createFormGroup();
   }
@@ -29,13 +29,13 @@ export class AddGuestDialogComponent {
       name: [''],
       category: [''],
       allergies: [''],
-      best_man: ['']
+      best_man: [false]
     });
   }
 
   public async addGuest() {
     const formData = this.addGuestForm.value;
-    await this.supabase.from('guests').insert({ name: formData.name, category: formData.category, allergies: formData.allergies, best_man: formData.best_man });
+    await this._supabase.from('guests').insert({ name: formData.name, category: formData.category, allergies: formData.allergies, best_man: formData.best_man });
 
     this.closeDialog(true);
   }
